@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Catatan</title>
+
+    <!-- Favicons -->
+    <link rel="icon" href="/src/public/favicon.png" sizes="512x512" />
+
+    <!-- Own Styles -->
+    <link rel="stylesheet" href="/src/styles/style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <section id="note">
+          <div id="noteListContainer">
+            <div class="placeholder initiate-display">
+              <caption-display caption="Save all your notes"></caption-display>
+              <button class="main-btn" id="openModalNoteBtn1">
+                Add Your First Note
+              </button>
+            </div>
+            <div class="placeholder notes-loading">
+              <caption-display caption="Getting your notes"></caption-display>
+            </div>
+            <note-list></note-list>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <button class="main-btn floating-btn" id="openModalNoteBtn2">
+      <span class="icon">+</span>
+      <span class="text">Add Note</span>
+    </button>
+
+    <modal-add-note></modal-add-note>
+
+    <footer-bar year="2024"></footer-bar>
+
+    <script type="module" src="/src/app.js"></script>
+  </body>
+</html>
