@@ -96,6 +96,10 @@ class ModalAddNote extends HTMLElement {
         background-color: #4caf50;
         color: white;
       }
+
+      .error-message {
+        color: red;
+      }
     `;
   }
 
@@ -118,20 +122,22 @@ class ModalAddNote extends HTMLElement {
           <div class="modal-content">
             <div class="modal-header">
               <div class="title">Create New Note</div>
-              <button class="close-btn" id="closeModalBtn">&times;</button>
+              <button class="close-btn" id="closeModalBtn" formnovalidate>&times;</button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                   <label for="title">Title</label>
-                  <input type="text" id="title" name="title" required />
+                  <input type="text" id="title" name="title" required aria-describedby="title-error-message" />
+                  <span id="title-error-message" class="error-message"></span>
                 </div>
                 <div class="form-group">
                   <label for="body">Body</label>
-                  <textarea id="body" name="body" required ></textarea>
+                  <textarea id="body" name="body" required aria-describedby="body-error-message"></textarea>
+                  <span id="body-error-message" class="error-message"></span>
                 </div>
             </div>
             <div class="modal-footer">
-              <button class="cancel-btn" id="cancelBtn">Cancel</button>
+              <button class="cancel-btn" id="cancelBtn" formnovalidate>Cancel</button>
               <button class="save-btn" id="saveBtn">Save</button>
             </div>
           </div>

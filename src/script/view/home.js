@@ -1,5 +1,6 @@
 import Utils from "../utils.js";
 import Notes from "../data/local/notes.js";
+import NotesApi from "../data/remote/notes-api.js";
 
 const home = () => {
   const noteListContainerElement = document.querySelector("#noteListContainer");
@@ -45,15 +46,15 @@ const home = () => {
     Utils.showElement(noteInitiateDisplayElement);
   };
 
-  const showNotes = () => {
+  const showNotes = async () => {
     showLoading();
 
-    const result = Notes.getAll();
-    if (result.length > 0) {
+    try {
+      const result = await NotesApi.getNotes();
       displayResult(result);
 
       showNoteList();
-    } else {
+    } catch (error) {
       showInitiateDislay();
     }
   };
@@ -83,22 +84,31 @@ const home = () => {
   // Close modal
   const closeModal = () => {
     modal.style.display = "none";
+
+    const errorMessages = modal.getElementsByClassName("error-message");
+    Array.from(errorMessages).forEach((element) => {
+      element.textContent = "";
+    });
   };
 
   closeModalBtn.addEventListener("click", closeModal);
   cancelBtn.addEventListener("click", closeModal);
 
-  saveBtn.addEventListener("click", () => {
+  saveBtn.addEventListener("click", async () => {
     const title = modalAddNote.getElementById("title").value;
     const body = modalAddNote.getElementById("body").value;
-    const result = Notes.addNote(title, body);
-    if (result.error) {
-      alert(result.message);
-    } else {
+    try {
+      await NotesApi.createNote({
+        title: title,
+        body: body,
+      });
+
       closeModal();
       showNotes();
       modalAddNote.getElementById("title").value = "";
       modalAddNote.getElementById("body").value = "";
+    } catch (error) {
+      alert(error);
     }
   });
 
@@ -139,13 +149,13 @@ const home = () => {
 
     const connectedValidationId = event.target.getAttribute("aria-describedby");
     const connectedValidationEl = connectedValidationId
-      ? document.getElementById(connectedValidationId)
+      ? modalAddNote.getElementById(connectedValidationId)
       : null;
 
     if (connectedValidationEl && errorMessage && !isValid) {
-      connectedValidationEl.innerText = errorMessage;
+      connectedValidationEl.textContent = errorMessage;
     } else {
-      connectedValidationEl.innerText = "";
+      connectedValidationEl.textContent = "";
     }
   });
 
@@ -156,13 +166,13 @@ const home = () => {
 
     const connectedValidationId = event.target.getAttribute("aria-describedby");
     const connectedValidationEl = connectedValidationId
-      ? document.getElementById(connectedValidationId)
+      ? modalAddNote.getElementById(connectedValidationId)
       : null;
 
     if (connectedValidationEl && errorMessage && !isValid) {
-      connectedValidationEl.innerText = errorMessage;
+      connectedValidationEl.textContent = errorMessage;
     } else {
-      connectedValidationEl.innerText = "";
+      connectedValidationEl.textContent = "";
     }
   });
   // end modal input
