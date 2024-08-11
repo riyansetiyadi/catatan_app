@@ -1,3 +1,5 @@
+import moment from "moment";
+
 class Utils {
   static showElement(element) {
     element.style.display = "flex";
@@ -14,16 +16,28 @@ class Utils {
   }
 
   static formattedDate(dateString) {
-    const date = new Date(dateString);
-    const options = {
-      month: "short",
-      day: "2-digit",
-      year: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    };
-    return date.toLocaleString("en-US", options).toUpperCase();
+    const date = moment(dateString);
+    return moment([
+      date.year(),
+      date.month(),
+      date.date(),
+      date.hour(),
+      date.minute(),
+      date.second(),
+    ])
+      .fromNow()
+      .toUpperCase();
+
+    // const date = new Date(dateString);
+    // const options = {
+    //   month: "short",
+    //   day: "2-digit",
+    //   year: "numeric",
+    //   hour: "numeric",
+    //   minute: "numeric",
+    //   hour12: true,
+    // };
+    // return date.toLocaleString("en-US", options).toUpperCase();
   }
 }
 

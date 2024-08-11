@@ -1,4 +1,4 @@
-class QueryWaiting extends HTMLElement {
+class CaptionDisplay extends HTMLElement {
   static get observedAttributes() {
     return ["caption"];
   }
@@ -51,4 +51,4 @@ class QueryWaiting extends HTMLElement {
   }
 }
 
-customElements.define("caption-display", QueryWaiting);
+customElements.define("caption-display", CaptionDisplay);

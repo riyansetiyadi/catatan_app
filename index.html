@@ -6,12 +6,17 @@
     <title>Catatan</title>
 
     <!-- Favicons -->
-    <link rel="icon" href="/src/public/favicon.png" sizes="512x512" />
-
-    <!-- Own Styles -->
-    <link rel="stylesheet" href="/src/styles/style.css" />
+    <link rel="icon" href="favicon.png" sizes="512x512" />
   </head>
   <body>
+    <ul class="menu">
+      <li class="active">
+        <a href="#all" data-content="all">ALL</a>
+      </li>
+      <li>
+        <a href="#archive" data-content="archive">ARCHIVE</a>
+      </li>
+    </ul>
     <main>
       <div class="container">
         <section id="note">
@@ -23,7 +28,10 @@
               </button>
             </div>
             <div class="placeholder notes-loading">
-              <caption-display caption="Getting your notes"></caption-display>
+              <loader-display caption="Getting your notes"></loader-display>
+            </div>
+            <div class="placeholder empty-notes-archive">
+              <caption-display caption="Your archive empty"></caption-display>
             </div>
             <note-list></note-list>
           </div>
@@ -40,6 +48,6 @@
 
     <footer-bar year="2024"></footer-bar>
 
-    <script type="module" src="/src/app.js"></script>
+    <script src="./dist/bundle.js"></script>
   </body>
 </html>

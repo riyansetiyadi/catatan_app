@@ -75,6 +75,7 @@ class ModalAddNote extends HTMLElement {
       .modal-footer {
         display: flex;
         justify-content: flex-end;
+        align-items: center;
         padding: 20px;
         border-top: 1px solid #ddd;
       }
@@ -139,6 +140,7 @@ class ModalAddNote extends HTMLElement {
             <div class="modal-footer">
               <button class="cancel-btn" id="cancelBtn" formnovalidate>Cancel</button>
               <button class="save-btn" id="saveBtn">Save</button>
+              <loader-display width="20" height="20" border-width="4"></loader-display>
             </div>
           </div>
         </div>
